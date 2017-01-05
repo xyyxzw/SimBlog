@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="generator" content="Sublime Text 3114">
+    <meta name="author" content="3@dengpeng.cc">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/site.min.css">
+    <title>登录</title>
+</head>
+<body>
+    <!-- 博客页面标题 -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Blog后台管理界面</h1>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="jumbotron col-md-offset-1 col-md-10">
+            <!-- 登录表单 -->
+            <form class="form-horizontal" role="form" method="post">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label btn-lg"><span class="glyphicon glyphicon-user"></span></label>
+                    <div class="col-sm-6">
+                        <input type="text" name="username" class="form-control input-lg" id="inputEmail3" placeholder="用户名">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label btn-lg"><span class="glyphicon glyphicon-lock"></span></label>
+                    <div class="col-sm-6">
+                        <input type="password" name="password" class="form-control input-lg" id="inputPassword3" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">登 录</button>
+                        <button type="reset" class="btn btn-default">重 置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- 网站底部 -->
+    <?php include ('./view/footer.html'); ?>
+
+</body>
+</html>

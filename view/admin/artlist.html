@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="generator" content="Sublime Text 3114">
+    <meta name="author" content="3@dengpeng.cc">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/site.min.css">
+    <title>文章列表</title>
+</head>
+<body>
+    <!-- 博客页面标题 -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Blog后台管理界面</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- main start -->
+        <div class="main">
+            <div class="row">
+                <!-- 左侧列start -->
+                <div class="col-md-4">
+                    <!-- 文章管理列 -->
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">文章管理</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p><a href="artlist.php">文章列表</a></p>
+                            <p><a href="artadd.php">发布文章</a></p>
+                        </div>
+                    </div>
+
+                    <!-- 栏目管理列 -->
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">栏目管理</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p><a href="catlist.php">栏目列表</a></p>
+                            <p><a href="catadd.php">添加栏目</a></p>
+                        </div>
+                    </div>
+
+                    <!-- 个人中心 -->
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">个人中心</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p><a href="pwd.php">修改密码</a></p>
+                            <p><a href="logout.php">退出登陆</a></p>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- 左侧列end -->
+
+                <!-- 右侧start -->
+                <div class="col-md-8">
+                    <!-- 栏目列表 -->
+                    <div class="table-responsive">  <!-- 响应式表格 -->
+                        <table class="table table-striped">
+                            <caption>文章列表</caption>
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>发表时间</th>
+                                    <th>标题</th>
+                                    <th>分类</th>
+                                    <th>回复数</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                            <?php foreach ($arts as $v) { ?>
+                                <tr>
+                                    <th><?php echo $v['art_id']; ?></th>
+                                    <th><?php echo date('Y/m/d', $v['pubtime']); ?></th>
+                                    <th>
+                                        <?php echo $v['title']; ?>
+                                        <!-- 判断是否有图片,如果有图给个图片logo -->
+                                        <?php if (!empty($v['pic'])) { ?>
+                                        <span class="glyphicon glyphicon-picture"></span>
+                                        <?php } ?>
+                                    </th>
+                                    <th><span class="label label-primary"><?php echo $v['catname']; ?></span></th>
+                                    <th><span class="badge"><?php echo $v['commentnum']; ?></span></th>
+                                    <th>
+                                        <a href="artedit.php?art_id=<?php echo $v['art_id']; ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="artdel.php?art_id=<?php echo $v['art_id']; ?>"><span class="glyphicon glyphicon-trash"></span></a>
+                                    </th>
+                                </tr>
+                            <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 分页 start -->
+                    <nav>
+                        <ul class="pagination">
+                            <li><a href="artlist.php?<?php echo $laquo; ?>">&laquo;</a></li>
+                            <!-- 遍历分页数组开始 -->
+                            <?php foreach ($page as $k => $v) { ?>
+                            <li <?php if ($k == $curr-1) echo "class=\"active\""; ?>>
+                                <a href="artlist.php?<?php echo $v; ?>">
+                                    <?php echo $k+1; ?>
+                                    <?php if($k == $curr) { ?>
+                                        <span class="sr-only">(current)</span>
+                                    <?php } ?>
+                                </a>
+                            </li>
+                            <?php } ?>
+                            <!-- 遍历分页数组结束 -->
+                            <li><a href="artlist.php?<?php echo $raquo; ?>">&raquo;</a></li>
+                        </ul>
+                    </nav>
+                    <!-- 分页 end -->
+
+                </div>
+                <!-- 右侧end -->
+            </div>
+        </div>
+        <!-- main end -->
+
+    </div>
+
+    <!-- 网站底部 -->
+    <?php include ('./view/footer.html'); ?>
+
+</body>
+</html>

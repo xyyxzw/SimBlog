@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="generator" content="Sublime Text 3114">
+    <meta name="author" content="3@dengpeng.cc">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/site.min.css">
+    <script type="text/javascript" src="./js/jquery-1.12.2.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    <title>博客首页</title>
+    <style type="text/css">
+        .article {
+            margin: 20px auto;
+            padding: 20px;
+            border: 2px solid #eee;
+            border-radius: 5px;
+        }
+        .main-footer {
+            background-color: #111;
+            color: #fff;
+            padding: 500px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="page-header">
+                <h1>燕十八博客</h1>
+                <span>乘风者，无惧</span>
+            </div>
+            <!-- 导航栏开始 -->
+            <ul class="nav nav-pills">
+                <li class="active"><a href="">首页</a></li>
+                <li><a href="">文章分类</a></li>
+                <li><a href="">关于我</a></li>
+                <li><a href="">留言</a></li>
+                <li class="dropdown pull-right">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">登陆&amp;注册<strong class="caret"></strong></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="">注册</a></li>
+                        <li class="divider"></li>
+                        <li><a href="login.php">登陆</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- 导航栏结束 -->
+            <!-- 左8列开始 -->
+            <div class="col-md-8 column">
+                <!-- 文章开始 -->
+                <?php foreach($arts as $v) { ?>
+                <div class="article">
+                    <h2>
+                        <a href="art.php?art_id=<?php echo $v['art_id']; ?>"><?php echo $v['title']; ?></a>
+                        </h2>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <?php if (!empty($v['pic'])) { ?>
+                                <img src=".<?php echo $v['pic']; ?>" class="img-responsive" alt="Responsive image">
+                            <?php } ?>
+                        </div>
+                        <div class="col-md-9 col-md-offset-0">
+                            <div style="letter-spacing: 5px;">
+                                <?php echo mb_substr(trim(strip_tags($v['content'])), 0, 200); ?>
+                            </div>
+                            <p>
+                                <a class="btn" href="art.php?art_id=<?php echo $v['art_id']; ?>">跟多内容 <span class="glyphicon glyphicon-play"></span></a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <button class="btn btn-default">
+                        <span class="glyphicon glyphicon-time"></span>
+                        <span class="badge"><?php echo date('Y年m月d日', $v['pubtime']); ?></span>
+                    </button>
+                    <button class="btn btn-default">
+                        <span class="glyphicon glyphicon-user"></span>
+                        <span class="badge"><?php echo $v['nickname']; ?></span>
+                    </button>
+                    <button class="btn btn-default">
+                        <span class="glyphicon glyphicon-bookmark"></span>
+                        <span class="badge"><?php echo $v['catname']; ?></span>
+                    </button>
+                    <button class="btn btn-default">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                        <span class="badge"><?php echo $v['commentnum']; ?></span>
+                    </button>
+                </div>
+                <?php } ?>
+                <!-- 文章结束 -->
+
+                <!-- 分页 start -->
+                <nav>
+                    <ul class="pagination">
+                        <li><a href="catlist.php?<?php echo $laquo; ?>">&laquo;</a></li>
+                        <!-- 遍历分页数组开始 -->
+                        <?php foreach ($page as $k => $v) { ?>
+                        <li <?php if ($k == $curr-1) echo "class=\"active\""; ?>>
+                            <a href="catlist.php?<?php echo $v; ?>">
+                                <?php echo $k+1; ?>
+                                <?php if($k == $curr) { ?>
+                                    <span class="sr-only">(current)</span>
+                                <?php } ?>
+                            </a>
+                        </li>
+                        <?php } ?>
+                        <!-- 遍历分页数组结束 -->
+                        <li><a href="catlist.php?<?php echo $raquo; ?>">&raquo;</a></li>
+                    </ul>
+                </nav>
+                <!-- 分页 end -->
+
+
+            </div>
+            <!-- 左8列结束 -->
+            <!-- 右3列开始 -->
+            <br>    <!-- 礼仪式换行 -->
+            <div class="col-md-3 col-md-offset-1">
+                <!-- 最新文章最热文章tab卡开始 -->
+                <div class="tabbable" id="tabs-278705">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                             <a href="#panel-779468" data-toggle="tab">最新文章</a>
+                        </li>
+                        <li>
+                             <a href="#panel-638215" data-toggle="tab">热门文章</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <br> <!-- 礼仪式换行 -->
+                        <div class="tab-pane active" id="panel-779468">
+                            <!-- 热门文章 -->
+                            <div class="list-group">
+                                <?php foreach ($new_art as $v) { ?>
+                                <a href="art.php?art_id=<?php echo $v['art_id']; ?>" class="list-group-item"><?php echo $v['title']; ?></a>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <div class="tab-pane" id="panel-638215">
+                            <div class="list-group">
+                                <?php foreach($hot_art as $v) { ?>
+                                <a href="art.php?art_id=<?php echo $v['art_id']; ?>" class="list-group-item">
+                                    <?php echo $v['title']; ?>
+                                    <span class="badge"><?php echo $v['commentnum']; ?></span>
+                                </a>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 最新文章最热文章tab卡结束 -->
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3 class="panel-title">文章分类</h3></div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                        <?php foreach ($cats as $v) { ?>
+                            <a href="index.php?m=cat&cat_id=<?php echo $v['cat_id']; ?>" class="list-group-item"><?php echo $v['catname']; ?><span class="badge"><?php echo $v['artnum']; ?></span></a>
+                        <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 右3列结束 -->
+        </div>
+    </div>
+
+    <!-- 网站底部 -->
+    <?php include ('./view/footer.html'); ?>
+
+</body>
+</html>

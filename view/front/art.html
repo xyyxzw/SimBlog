@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="generator" content="Sublime Text 3114">
+    <meta name="author" content="3@dengpeng.cc">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/site.min.css">
+    <script type="text/javascript" src="./js/jquery-1.12.2.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    <title>博客首页</title>
+    <style type="text/css">
+        .article {
+            margin: 20px auto;
+            padding: 20px;
+            border: 2px solid #eee;
+            border-radius: 5px;
+        }
+        .main-footer {
+            background-color: #111;
+            color: #fff;
+            padding: 500px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="page-header">
+                <h1>燕十八博客</h1>
+                <span>乘风者，无惧</span>
+            </div>
+            <!-- 导航栏开始 -->
+            <ul class="nav nav-pills">
+                <li class="active"><a href="index.php">首页</a></li>
+                <li><a href="">文章分类</a></li>
+                <li><a href="">关于我</a></li>
+                <li><a href="">留言</a></li>
+                <li class="dropdown pull-right">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">登陆&amp;注册<strong class="caret"></strong></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="">注册</a></li>
+                        <li class="divider"></li>
+                        <li><a href="login.php">登陆</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- 导航栏结束 -->
+
+            <!-- 左8列开始 -->
+            <div class="col-md-8 column">
+                <!-- 文章开始 -->
+                <div class="article">
+
+                    <h2><?php echo $art['title']; ?></h2>
+
+                    <br>
+                    <button class="btn btn-default">
+                        <span class="glyphicon glyphicon-time"></span>
+                        <span class="badge"><?php echo date('Y年m月d日', $art['pubtime']); ?></span>
+                    </button>
+                    <button class="btn btn-default">
+                        <span class="glyphicon glyphicon-user"></span>
+                        <span class="badge"><?php echo $art['nickname']; ?></span>
+                    </button>
+                    <button class="btn btn-default">
+                        <span class="glyphicon glyphicon-bookmark"></span>
+                        <span class="badge"><?php echo $art['catname']; ?></span>
+                    </button>
+                    <button class="btn btn-default">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                        <span class="badge"><?php echo $art['commentnum']; ?></span>
+                    </button>
+                    <hr style="border: 1px solid black;">
+                    <!-- 图片 -->
+                    <div class="row">
+                        <div class="col-md-offset-4 col-xs-8 col-md-4">
+                            <?php if (!empty($art['pic'])) { ?>
+                                <img src=".<?php echo $art['pic']; ?>" class="img-responsive" alt="<?php echo $art['title']; ?>">
+                            <?php } ?>
+                        </div>
+                    </div>
+
+                    <br />
+                    <!-- 正文 -->
+                    <?php echo $art['content']; ?>
+                    <br />
+
+                    <!-- 百度分享开始 -->
+                    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+                    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","sqq","qzone","tsina","weixin","tieba","thx","ibaidu","meilishuo","mogujie","diandian","huaban","duitang","hx","fx","youdao","sdo","qingbiji","people","xinhua","mail","isohu","yaolan","wealink","ty","iguba","fbook","twi","linkedin","h163","evernotecn","copy","print"],"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+                    <!-- 百度分享结束 -->
+
+                    <hr style="border: 1px solid black;">
+                    <!-- UY BEGIN -->
+                    <div id="uyan_frame"></div>
+                    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js"></script>
+                    <!-- UY END -->
+
+                    <!-- 评论展示 -->
+                    <hr style="border: 1px solid black;">
+                    <div class="row">
+                        <div class="col-md-offset-0 col-md-8">
+                            <form action="" method="post" role="form">
+
+                                <!-- 评论者昵称开始 -->
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">昵称：</span>
+                                        <input type="text" class="form-control" name="nickname" placeholder="昵称">
+                                    </div>
+                                </div>
+                                <!-- 评论者昵称结束 -->
+
+                                <!-- 评论者邮箱开始 -->
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">邮箱：</span>
+                                        <input type="email" class="form-control" name="email" placeholder="Gravatar图像邮箱">
+                                    </div>
+                                </div>
+                                <!-- 评论者邮箱结束 -->
+
+                                <!-- 评论内容开始 -->
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">内容：</span>
+                                        <textarea class="form-control" name="content" id="" cols="30" rows="5" placeholder="健康评论"></textarea>
+                                    </div>
+                                </div>
+                                <!-- 评论内容结束 -->
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">提交</button>
+                                    <button type="reset" class="btn btn-default btn-block">重置</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- 评论展示 -->
+                    <hr style="border: 1px solid black;">
+                    <div class="bs-example">
+                    <?php if (!empty($comments)) { ?>
+                        <?php foreach($comments as $v) { ?>
+                        <div class="media">
+                            <a class="media-left" href="#">
+                                <img src="./images/uface.jpg" alt="Generic placeholder image">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading"><?php echo $v['nickname']; ?></h4>
+                                <br>
+                                <p><?php echo $v['content']; ?></p>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    <?php } ?>
+                    </div>
+
+
+                </div>
+                <!-- 文章结束 -->
+
+
+            </div>
+            <!-- 左8列结束 -->
+            <!-- 右3列开始 -->
+            <br>    <!-- 礼仪式换行 -->
+            <div class="col-md-3 col-md-offset-1">
+                <!-- 最新文章最热文章tab卡开始 -->
+                <div class="tabbable" id="tabs-278705">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                             <a href="#panel-779468" data-toggle="tab">最新文章</a>
+                        </li>
+                        <li>
+                             <a href="#panel-638215" data-toggle="tab">热门文章</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <br> <!-- 礼仪式换行 -->
+                        <div class="tab-pane active" id="panel-779468">
+                            <!-- 热门文章 -->
+                            <div class="list-group">
+                                <?php foreach ($new_art as $v) { ?>
+                                <a href="art.php?art_id=<?php echo $v['art_id']; ?>" class="list-group-item"><?php echo $v['title']; ?></a>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <div class="tab-pane" id="panel-638215">
+                            <div class="list-group">
+                                <?php foreach($hot_art as $v) { ?>
+                                <a href="art.php?art_id=<?php echo $v['art_id']; ?>" class="list-group-item">
+                                    <?php echo $v['title']; ?>
+                                    <span class="badge"><?php echo $v['commentnum']; ?></span>
+                                </a>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 最新文章最热文章tab卡结束 -->
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3 class="panel-title">文章分类</h3></div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                        <?php foreach ($cats as $v) { ?>
+                            <a href="index.php?m=cat&cat_id=<?php echo $v['cat_id']; ?>" class="list-group-item"><?php echo $v['catname']; ?><span class="badge"><?php echo $v['artnum']; ?></span></a>
+                        <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 右3列结束 -->
+        </div>
+    </div>
+
+    <!-- 网站底部 -->
+    <?php include ('./view/footer.html'); ?>
+
+</body>
+</html>
